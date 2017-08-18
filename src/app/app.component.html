@@ -2,7 +2,39 @@
   Consumir API Rest
 </h1>
 <ul>
-  <li *ngFor="let n of items">
-    id: {{n.itemId}} - code: {{n.code}} - Nombre: {{n.name}}
+  <li *ngFor="let item of items">
+    <a href="javascript:void(0)" (click)="getItemById(item.itemId)">
+      id: {{item.itemId}} - code: {{item.code}}
+    </a>
+    =>
+    <a href="javascript:void(0)" (click)="deleteItem(item)">Eliminar</a>
   </li>
 </ul>
+
+<br>
+
+<div>
+  <form name="form" (ngSubmit)="(model.itemId ? updateItem() : createItem())" #f="ngForm" novalidate>
+
+    <label for="code">Id:</label>
+    {{model.itemId}}
+    <br>
+
+    <label for="code">Code:</label>
+    <input type="text" class="form-control" name="code" id="code" [(ngModel)]="model.code"
+           #name="ngModel"
+    />
+
+    <br>
+
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" name="name" id="name" [(ngModel)]="model.name"
+           #name="ngModel"
+    />
+    <div>
+      <button [innerHtml]="model.itemId ? 'Modificar' : 'Crear'"></button>
+    </div>
+  </form>
+</div>
+
+
